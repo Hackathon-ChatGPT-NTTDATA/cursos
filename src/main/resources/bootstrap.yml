@@ -1,0 +1,15 @@
+ 
+spring:
+  application:
+    name: cursos
+  cloud:
+    config:
+      enabled: true
+      uri: http://localhost:7000    
+      label: master
+     # uri: ${CONFIG_SERVER_URI://localhost:7000}
+  banner:
+    location: classpath:banner/banner.txt
+    image:
+     location: classpath:fotocreador/microservicios.png  
+     
