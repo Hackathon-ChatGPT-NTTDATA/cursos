@@ -101,7 +101,7 @@ public class CursoController {
 		return new ResponseEntity<>(Mono.just(new Cursos()), HttpStatus.I_AM_A_TEAPOT);
 	}
 
-	@DeleteMapping("/delete-cursos-asset/{id}")
+	@DeleteMapping("/delete-cursos/{id}")
 	public ResponseEntity<Mono<Void>> deleteCursosAsset(@PathVariable String id) {
 		Cursos cursosAsset = new Cursos();
 		cursosAsset.setId(id);
