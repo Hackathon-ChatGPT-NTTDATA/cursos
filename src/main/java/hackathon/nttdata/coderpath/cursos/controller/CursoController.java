@@ -56,7 +56,7 @@ public class CursoController {
 		return ResponseEntity.ok(service.balanceadorTest());
 	}
 
-	@GetMapping("/all")
+	@GetMapping("/cursos/all")
 	public Flux<Cursos> searchAll() {
 		Flux<Cursos> per = service.findAlls();
 		log.info("CURSOS ASSET registered: " + per);
