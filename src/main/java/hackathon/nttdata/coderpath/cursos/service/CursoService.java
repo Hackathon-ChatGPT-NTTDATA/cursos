@@ -6,9 +6,7 @@ import hackathon.nttdata.coderpath.cursos.documents.Cursos;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public interface CursoService {
-
-	
+public interface CursoService {	
 	Mono<Cursos> findById(String id);
 
 	Flux<Cursos> findAlls();
