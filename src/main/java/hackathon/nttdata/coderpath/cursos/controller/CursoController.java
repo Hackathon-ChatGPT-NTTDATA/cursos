@@ -56,7 +56,7 @@ public class CursoController {
 		return ResponseEntity.ok(service.balanceadorTest());
 	}
 
-	@GetMapping("/cursos/all")
+	@GetMapping("/all")
 	public Flux<Cursos> searchAll() {
 		Flux<Cursos> per = service.findAlls();
 		log.info("CURSOS ASSET registered: " + per);
@@ -65,7 +65,7 @@ public class CursoController {
 
 	@GetMapping("/id/{id}")
 	public Mono<Cursos> searchById(@PathVariable String id) {
-		log.info("Cursos Asset id: " + service.findById(id) + " con codigo: " + id);
+		log.info("Personal Asset id: " + service.findById(id) + " con codigo: " + id);
 		return service.findById(id);
 	}
 
@@ -85,8 +85,7 @@ public class CursoController {
 	}
 
 	@PutMapping("/update-cursos/{id}")
-	public ResponseEntity<Mono<?>> updateCursosAsset(@PathVariable String id, 
-			@Valid @RequestBody Cursos cursosAsset) {
+	public ResponseEntity<Mono<?>> updateCursosAsset(@PathVariable String id, @Valid @RequestBody Cursos cursosAsset) {
 		Mono.just(cursosAsset).doOnNext(t -> {
 			cursosAsset.setId(id);
 			t.setCreateAt(new Date());
@@ -102,7 +101,7 @@ public class CursoController {
 		return new ResponseEntity<>(Mono.just(new Cursos()), HttpStatus.I_AM_A_TEAPOT);
 	}
 
-	@DeleteMapping("/delete-curso/{id}")
+	@DeleteMapping("/delete-cursos/{id}")
 	public ResponseEntity<Mono<Void>> deleteCursosAsset(@PathVariable String id) {
 		Cursos cursosAsset = new Cursos();
 		cursosAsset.setId(id);
