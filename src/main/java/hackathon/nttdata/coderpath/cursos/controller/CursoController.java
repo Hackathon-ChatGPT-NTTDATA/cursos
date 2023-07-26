@@ -56,6 +56,11 @@ public class CursoController {
 		return ResponseEntity.ok(service.balanceadorTest());
 	}
 
+	@GetMapping("/webclient-test")
+	public ResponseEntity<?> rutaWebClientTest() {
+		return ResponseEntity.ok(service.rutaWebClientTest());
+	}
+	
 	@GetMapping("/all")
 	public Flux<Cursos> searchAll() {
 		Flux<Cursos> per = service.findAlls();

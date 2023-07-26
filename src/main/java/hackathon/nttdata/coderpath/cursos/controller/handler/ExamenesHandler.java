@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-
+import hackathon.nttdata.coderpath.cursos.controller.validation.ObjectValidator;
 import hackathon.nttdata.coderpath.cursos.documents.dtowebclient.Examenes;
+import hackathon.nttdata.coderpath.cursos.service.CursoService;
 
-import org.springframework.web.reactive.function.server.ServerRequest;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,15 +26,16 @@ public class ExamenesHandler {
 	private final ObjectValidator objectValidator;
 	
 	@Autowired	
-	private ServerResponse service;
+	private CursoService service;
 
-	public Mono<ServerResponse> listar1 (ServerRequest request) {
+	public Mono<ServerResponse> listar (ServerRequest request) {
 
 		return ServerResponse
 				.ok()
 				.contentType(APPLICATION_JSON_UTF8)
 				.body(service.findAll(), Examenes.class);
 	}
+	
 
 	public Mono<ServerResponse> getOnes(ServerRequest request) {
 
@@ -48,52 +49,6 @@ public class ExamenesHandler {
 				.build()));
 	}
 	
-	  public Mono<ServerResponse> save1(ServerRequest request) {
-	        Mono<Examenes> dtoMono = request.bodyToMono(Examenes.class)
-	        		.doOnNext(objectValidator::validate);
-	        return dtoMono.flatMap(productDto -> ServerResponse
-	        		.ok()
-	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.body(service.save1(productDto), Examenes.class));
-	    }
-
-	    public Mono<ServerResponse> update1(ServerRequest request) {
-	        String id = request.pathVariable("id");
-	        Mono<Examenes> dtoMono = request.bodyToMono(Examenes.class)
-	        		.doOnNext(objectValidator::validate);
-	        return dtoMono.flatMap(c -> ServerResponse
-	        		.ok()
-	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.body(service.update1(c, id), Examenes.class));
-	    }
-
-	    public Mono<ServerResponse> delete(ServerRequest request) {
-	    	String id = request.pathVariable("id");
-	        return ServerResponse
-	        		.ok()
-	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.body(service.delete(id), Examenes.class);
-	    }	private ExamenService service;
-
-	public Mono<ServerResponse> listar(ServerRequest request) {
-
-		return ServerResponse
-				.ok()
-				.contentType(APPLICATION_JSON_UTF8)
-				.body(service.findAll(), Examenes.class);
-	}
-
-	public Mono<ServerResponse> getOne(ServerRequest request) {
-
-		String id = request.pathVariable("id");
-
-		return service.findExamesById(id).flatMap(c -> ServerResponse
-				.ok()
-				.contentType(APPLICATION_JSON_UTF8)
-				.syncBody(c)
-				.switchIfEmpty(ServerResponse.notFound()
-				.build()));
-	}
 	
 	  public Mono<ServerResponse> save(ServerRequest request) {
 	        Mono<Examenes> dtoMono = request.bodyToMono(Examenes.class)
@@ -103,8 +58,9 @@ public class ExamenesHandler {
 	        		.contentType(MediaType.APPLICATION_JSON)
 	        		.body(service.save(productDto), Examenes.class));
 	    }
+	  
 
-	    public Mono<ServerResponse> update1(ServerRequest request) {
+	    public Mono<ServerResponse> update(ServerRequest request) {
 	        String id = request.pathVariable("id");
 	        Mono<Examenes> dtoMono = request.bodyToMono(Examenes.class)
 	        		.doOnNext(objectValidator::validate);
@@ -113,19 +69,14 @@ public class ExamenesHandler {
 	        		.contentType(MediaType.APPLICATION_JSON)
 	        		.body(service.update(c, id), Examenes.class));
 	    }
+	    
 
-	    public Mono<ServerResponse> delete1(ServerRequest request) {
+	    public Mono<ServerResponse> delete(ServerRequest request) {
 	    	String id = request.pathVariable("id");
 	        return ServerResponse
 	        		.ok()
 	        		.contentType(MediaType.APPLICATION_JSON)
 	        		.body(service.delete(id), Examenes.class);
-	    }
-						
-	}
-	
-		
-	
-	
+	    }	
 
 }
