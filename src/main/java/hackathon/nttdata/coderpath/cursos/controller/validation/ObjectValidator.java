@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 import hackathon.nttdata.coderpath.cursos.codeexception.CustomException;
-import hackathon.nttdata.coderpath.cursos.controller.validation.ObjectValidator;
+//import hackathon.nttdata.coderpath.cursos.controller.validation.ObjectValidator;//
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
