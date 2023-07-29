@@ -70,7 +70,7 @@ public class CursoController {
 
 	@GetMapping("/id/{id}")
 	public Mono<Cursos> searchById(@PathVariable String id) {
-		log.info("Personal Asset id: " + service.findById(id) + " con codigo: " + id);
+		log.info("Cursos Asset id: " + service.findById(id) + " con codigo: " + id);
 		return service.findById(id);
 	}
 
