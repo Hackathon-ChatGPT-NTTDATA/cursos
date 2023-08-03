@@ -63,20 +63,20 @@ public class CursoController {
 	
 	@GetMapping("/all")
 	public Flux<Cursos> searchAll() {
-		Flux<Cursos> per = service.findAlls();
+		Flux<Cursos> per = service.findAllCursos();
 		log.info("CURSOS ASSET registered: " + per);
 		return per;
 	}
 
 	@GetMapping("/id/{id}")
 	public Mono<Cursos> searchById(@PathVariable String id) {
-		log.info("Cursos Asset id: " + service.findById(id) + " con codigo: " + id);
-		return service.findById(id);
+		log.info("Cursos Asset id: " + service.findCursoById(id) + " con codigo: " + id);
+		return service.findCursoById(id);
 	}
 
 	@PostMapping("/create-cursos")
 	public Mono<Cursos> createCursos(@Valid @RequestBody Cursos cursoAsset) {
-		log.info("Cursos hackathon NTTTDATA create: " + service.saves(cursoAsset));
+		log.info("Cursos hackathon NTTTDATA create: " + service.saveCurso(cursoAsset));
 		Mono.just(cursoAsset).doOnNext(t -> {
 
 			t.setCreateAt(new Date());
@@ -84,7 +84,7 @@ public class CursoController {
 		}).onErrorReturn(cursoAsset).onErrorResume(e -> Mono.just(cursoAsset))
 				.onErrorMap(f -> new InterruptedException(f.getMessage())).subscribe(x -> log.info(x.toString()));
 
-		Mono<Cursos> newPersonalAsset = service.saves(cursoAsset);
+		Mono<Cursos> newPersonalAsset = service.saveCurso(cursoAsset);
 
 		return newPersonalAsset;
 	}
@@ -98,7 +98,7 @@ public class CursoController {
 		}).onErrorReturn(cursosAsset).onErrorResume(e -> Mono.just(cursosAsset))
 				.onErrorMap(f -> new InterruptedException(f.getMessage())).subscribe(x -> log.info(x.toString()));
 
-		Mono<Cursos> pAsset = service.saves(cursosAsset);
+		Mono<Cursos> pAsset = service.saveCurso(cursosAsset);
 
 		if (pAsset != null) {
 			return new ResponseEntity<>(pAsset, HttpStatus.CREATED);
@@ -110,9 +110,9 @@ public class CursoController {
 	public ResponseEntity<Mono<Void>> deleteCursosAsset(@PathVariable String id) {
 		Cursos cursosAsset = new Cursos();
 		cursosAsset.setId(id);
-		Mono<Cursos> newPersonalAsset = service.findById(id);
+		Mono<Cursos> newPersonalAsset = service.findCursoById(id);
 		newPersonalAsset.subscribe();
-		Mono<Void> test = service.delete(cursosAsset);
+		Mono<Void> test = service.deleteCurso(cursosAsset);
 		test.subscribe();
 		return ResponseEntity.noContent().build();
 	}

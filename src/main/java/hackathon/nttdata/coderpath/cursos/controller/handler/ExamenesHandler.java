@@ -30,7 +30,7 @@ public class ExamenesHandler {
 		return ServerResponse
 				.ok()
 				.contentType(APPLICATION_JSON_UTF8)
-				.body(service.findAll(), Examenes.class);
+				.body(service.findAllExamenes(), Examenes.class);
 	}
 	
 
@@ -53,7 +53,7 @@ public class ExamenesHandler {
 	        return dtoMono.flatMap(productDto -> ServerResponse
 	        		.ok()
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.body(service.save(productDto), Examenes.class));
+	        		.body(service.saveExamenes(productDto), Examenes.class));
 	    }
 	  
 
@@ -64,7 +64,7 @@ public class ExamenesHandler {
 	        return dtoMono.flatMap(c -> ServerResponse
 	        		.ok()
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.body(service.update(c, id), Examenes.class));
+	        		.body(service.updateExamenes(c, id), Examenes.class));
 	    }
 	    
 
@@ -73,7 +73,7 @@ public class ExamenesHandler {
 	        return ServerResponse
 	        		.ok()
 	        		.contentType(MediaType.APPLICATION_JSON)
-	        		.body(service.delete(id), Examenes.class);
+	        		.body(service.deleteExamenes(id), Examenes.class);
 	    }	
 
 }
