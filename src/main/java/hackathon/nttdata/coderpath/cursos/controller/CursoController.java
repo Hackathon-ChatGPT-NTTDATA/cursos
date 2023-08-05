@@ -4,7 +4,6 @@ import java.util.Date;
 
 import javax.validation.Valid;
 
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -60,7 +59,7 @@ public class CursoController {
 	public ResponseEntity<?> rutaWebClientTest() {
 		return ResponseEntity.ok(service.rutaWebClientTest());
 	}
-	
+
 	@GetMapping("/all")
 	public Flux<Cursos> searchAll() {
 		Flux<Cursos> per = service.findAllCursos();
@@ -115,6 +114,24 @@ public class CursoController {
 		Mono<Void> test = service.deleteCurso(cursosAsset);
 		test.subscribe();
 		return ResponseEntity.noContent().build();
+	}
+
+	///// Seccion webclient con examen
+
+	@PostMapping("/create-curso/examen/{id}")
+	public Mono<Cursos> createCursoConExamen(@PathVariable String id, @Valid @RequestBody Cursos cursoAsset) {
+
+		log.info("Cursos hackathon NTTTDATA create: " + service.saveCursoExamenes(cursoAsset, id));
+		Mono.just(cursoAsset).doOnNext(t -> {
+
+			t.setCreateAt(new Date());
+
+		}).onErrorReturn(cursoAsset).onErrorResume(e -> Mono.just(cursoAsset))
+				.onErrorMap(f -> new InterruptedException(f.getMessage())).subscribe(x -> log.info(x.toString()));
+
+		Mono<Cursos> newCurso = service.saveCursoExamenes(cursoAsset, id);
+
+		return newCurso;
 	}
 
 	/*
