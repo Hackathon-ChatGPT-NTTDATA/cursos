@@ -18,7 +18,7 @@
 		<java.version>17</java.version>
 		<spring-cloud.version>2022.0.6</spring-cloud.version>
 	</properties>
-	<dependencies>
+<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb-reactive</artifactId>
@@ -53,6 +53,10 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+			<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-reactor-netty</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -66,7 +70,7 @@
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
-			<version>4.0.4</version>
+			<version>4.0.3</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -127,7 +131,6 @@
 		</dependency>
 
 	</dependencies>
-
 
 	<dependencyManagement>
 		<dependencies>
