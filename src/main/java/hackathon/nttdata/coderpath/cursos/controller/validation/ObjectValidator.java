@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import hackathon.nttdata.coderpath.cursos.codeexception.CustomException;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
 import java.util.Set;
 import java.util.stream.Collectors;
 

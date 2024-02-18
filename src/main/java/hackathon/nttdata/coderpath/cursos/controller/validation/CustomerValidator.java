@@ -1,7 +1,7 @@
 package hackathon.nttdata.coderpath.cursos.controller.validation;
 
 
-import javax.validation.Validator;
+import jakarta.validation.Validator;
 import hackathon.nttdata.coderpath.cursos.documents.Cursos;
 import reactor.core.publisher.Mono;
 

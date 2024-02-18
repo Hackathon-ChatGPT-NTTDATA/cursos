@@ -55,7 +55,7 @@ public class CursoServiceImpl implements CursoService {
 
 		String id = request.pathVariable(idx);
 
-		return this.findExamenesById(id).flatMap(c -> ServerResponse.ok().contentType(APPLICATION_JSON_UTF8).syncBody(c)
+		return this.findExamenesById(id).flatMap(c -> ServerResponse.ok().contentType(APPLICATION_JSON).syncBody(c)
 				.switchIfEmpty(ServerResponse.notFound().build()));
 	}
 
@@ -71,7 +71,7 @@ public class CursoServiceImpl implements CursoService {
 
 		String id = request.pathVariable(idx);
 
-		return this.findAlumnosById(id).flatMap(c -> ServerResponse.ok().contentType(APPLICATION_JSON_UTF8).syncBody(c)
+		return this.findAlumnosById(id).flatMap(c -> ServerResponse.ok().contentType(APPLICATION_JSON).syncBody(c)
 				.switchIfEmpty(ServerResponse.notFound().build()));
 	}
 
@@ -114,7 +114,7 @@ public class CursoServiceImpl implements CursoService {
 	public Flux<Examenes> findAllExamenes() {
 		// TODO Auto-generated method stub
 		System.out.println("ruta de Examenes: " + client.toString());
-		return client.get().uri("/all").accept(APPLICATION_JSON_UTF8).exchange()
+		return client.get().uri("/all").accept(APPLICATION_JSON).exchange()
 				.flatMapMany(response -> response.bodyToFlux(Examenes.class));
 	}
 
@@ -125,7 +125,7 @@ public class CursoServiceImpl implements CursoService {
 
 		params.put("id", id);
 
-		return client.get().uri("/id/{id}", params).accept(APPLICATION_JSON_UTF8).retrieve().bodyToMono(Examenes.class);
+		return client.get().uri("/id/{id}", params).accept(APPLICATION_JSON).retrieve().bodyToMono(Examenes.class);
 		// .exchange()
 		// .flatMap(response -> response.bodyToMono(Cursos.class));
 	}
@@ -148,7 +148,7 @@ public class CursoServiceImpl implements CursoService {
 	@Override
 	public Mono<Examenes> saveExamenes(Examenes document) {
 		// TODO Auto-generated method stub
-		return client.post().uri("/create-examen").accept(APPLICATION_JSON_UTF8).contentType(APPLICATION_JSON_UTF8)
+		return client.post().uri("/create-examen").accept(APPLICATION_JSON).contentType(APPLICATION_JSON)
 				.body(fromObject(document))
 				// .syncBody(document)
 				.retrieve().bodyToMono(Examenes.class);
@@ -157,8 +157,8 @@ public class CursoServiceImpl implements CursoService {
 	@Override
 	public Mono<Examenes> updateExamenes(Examenes document, String id) {
 		// TODO Auto-generated method stub
-		return client.put().uri("/update-examen/{id}", Collections.singletonMap("id", id)).accept(APPLICATION_JSON_UTF8)
-				.contentType(APPLICATION_JSON_UTF8)
+		return client.put().uri("/update-examen/{id}", Collections.singletonMap("id", id)).accept(APPLICATION_JSON)
+				.contentType(APPLICATION_JSON)
 				// .body(fromObject(document))
 				.syncBody(document).retrieve().bodyToMono(Examenes.class);
 	}
@@ -186,7 +186,7 @@ public class CursoServiceImpl implements CursoService {
 	public Flux<Alumnos> findAllAlumnos() {
 		// TODO Auto-generated method stub
 		System.out.println("ruta de Alumnos: " + webClientalumnos.toString());
-		return webClientalumnos.get().uri("/all").accept(APPLICATION_JSON_UTF8).exchange()
+		return webClientalumnos.get().uri("/all").accept(APPLICATION_JSON).exchange()
 				.flatMapMany(response -> response.bodyToFlux(Alumnos.class));
 	}
 
@@ -197,7 +197,7 @@ public class CursoServiceImpl implements CursoService {
 
 		params.put("id", id);
 
-		return webClientalumnos.get().uri("/id/{id}", params).accept(APPLICATION_JSON_UTF8).retrieve()
+		return webClientalumnos.get().uri("/id/{id}", params).accept(APPLICATION_JSON).retrieve()
 				.bodyToMono(Alumnos.class);
 		// .exchange()
 		// .flatMap(response -> response.bodyToMono(Cursos.class));
@@ -206,8 +206,8 @@ public class CursoServiceImpl implements CursoService {
 	@Override
 	public Mono<Alumnos> saveAlumnos(Cursos document) {
 		// TODO Auto-generated method stub
-		return webClientalumnos.post().uri("/create-alumno").accept(APPLICATION_JSON_UTF8)
-				.contentType(APPLICATION_JSON_UTF8).body(fromObject(document))
+		return webClientalumnos.post().uri("/create-alumno").accept(APPLICATION_JSON)
+				.contentType(APPLICATION_JSON).body(fromObject(document))
 				// .syncBody(document)
 				.retrieve().bodyToMono(Alumnos.class);
 	}
@@ -216,7 +216,7 @@ public class CursoServiceImpl implements CursoService {
 	public Mono<Alumnos> updateAlumnos(Cursos document, String id) {
 		// TODO Auto-generated method stub
 		return webClientalumnos.put().uri("/update-alumno/{id}", Collections.singletonMap("id", id))
-				.accept(APPLICATION_JSON_UTF8).contentType(APPLICATION_JSON_UTF8)
+				.accept(APPLICATION_JSON).contentType(APPLICATION_JSON)
 				// .body(fromObject(document))
 				.syncBody(document).retrieve().bodyToMono(Alumnos.class);
 	}

@@ -15,8 +15,7 @@ public class CustomAttributes extends DefaultErrorAttributes {
 	public Map<String, Object> getErrorAttributes(ServerRequest request, ErrorAttributeOptions options){
 		Map<String, Object> errorAttributes = new HashMap<>();
 		Throwable throwable = super.getError(request);
-		if (throwable instanceof CustomException) {
-			CustomException customException = (CustomException) throwable;
+		if (throwable instanceof CustomException customException) {
 			errorAttributes.put("status", customException.getStatus());
 			errorAttributes.put("message", customException.getMessage());		
 		}

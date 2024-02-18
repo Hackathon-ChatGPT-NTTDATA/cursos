@@ -29,7 +29,7 @@ public class ExamenesHandler {
 
 		return ServerResponse
 				.ok()
-				.contentType(APPLICATION_JSON_UTF8)
+				.contentType(APPLICATION_JSON)
 				.body(service.findAllExamenes(), Examenes.class);
 	}
 	
@@ -40,7 +40,7 @@ public class ExamenesHandler {
 
 		return service.findExamenesById(id).flatMap(c -> ServerResponse
 				.ok()
-				.contentType(APPLICATION_JSON_UTF8)
+				.contentType(APPLICATION_JSON)
 				.syncBody(c)
 				.switchIfEmpty(ServerResponse.notFound()
 				.build()));
